@@ -1,0 +1,127 @@
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
+
+h1 {
+    margin: 20px;
+}
+
+header {
+    text-align: center;
+}
+
+.file {
+    width: 500px;
+    margin: auto;
+    text-align: left;
+}
+
+.file-custom:after {
+    content: 'Choisissez vos Jiras au format XML';
+}
+
+.file-custom:before {
+    content: 'Parcourir';
+}
+
+#cards {
+
+}
+
+.card {
+    width: 800px;
+	height: 340px;
+	border: solid 15px black;
+	margin: 25px auto;
+	position: relative;
+	page-break-inside: avoid;
+	background: white;
+    border-radius: 5px;
+}
+
+.card-key {
+	position: absolute;
+	top: 18px;
+	left: 20px;
+    color: orange;
+}
+
+.card-title {
+	position: absolute;
+	height: 185px;
+	width: 400px;
+	top: 50px;
+	left: 20px;
+	text-align: left;
+	padding-top: 13px;
+	border-top: solid 2px black;
+}
+
+.card-description {
+	position: absolute;
+	width: 300px;
+	height: 245px;
+	top: 19px;
+	right: 10px;
+	border-left: solid 1px grey;
+    padding-left: 10px;
+	text-align: left;
+	font-size: 13px;
+	line-height: 16px;
+	overflow: hidden;
+}
+
+.card-requirements {
+    position: absolute;
+    bottom: 10px;
+    left: 20px;
+}
+
+.requirement {
+    display: inline-block;
+    position: relative;
+    padding-left: 20px;
+    margin-right: 10px;
+    &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 4px;
+        height: 16px;
+        width: 16px;
+        border: 1px solid black;
+    }
+}
+
+.classification {
+	position: absolute;
+	width: 170px;
+	height: 20px;
+	bottom: 15px;
+	left: 20px;
+	border: solid 4px black;
+	text-align: right;
+	font-size: 27px;
+	padding: 10px;
+}
+
+.complexite {
+	position: absolute;
+	width: 170px;
+	height: 20px;
+	bottom: 15px;
+	left: 240px;
+	border: solid 4px black;
+	text-align: right;
+	font-size: 27px;
+	padding: 10px;
+}
+
+
+@media print {
+    header {
+        display: none;
+    }
+
+    .card:first-child {
+        margin-top: 0;
+    }
+}
