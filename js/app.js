@@ -1,29 +1,31 @@
 'use strict';
 
 function parseXML (fileContent) {
-    let attributes = {};
     let domParser = new DOMParser();
     let xml = domParser.parseFromString(fileContent, "text/xml");
 
-    let item = xml.getElementsByTagName('item')[0];
-    attributes.key = item.getElementsByTagName('key')[0].innerHTML;
-    attributes.title = item.getElementsByTagName('summary')[0].innerHTML;
-    attributes.description = item.getElementsByTagName('description')[0].innerHTML;
-    let timeestimate = item.getElementsByTagName('timeestimate')[0];
-    attributes.timeestimate = timeestimate ? timeestimate.getAttribute('seconds') : null;
+    let items = Array.from(xml.getElementsByTagName('item'));
 
-	/* Custom fields */
-    let customFields = Array.from(item.getElementsByTagName('customfields')[0].children);
-	customFields.forEach((customField) => {
-        if (customField.id === 'customfield_12310293') {
-            attributes.effort = parseInt(customField.getElementsByTagName('customfieldvalue')[0].innerHTML);
-        }
-        if (customField.id === 'customfield_12311120') {
-            attributes.epicLink = customField.getElementsByTagName('customfieldvalue')[0].innerHTML;
-        }
-    });
+    return items.map((item) => {
+        let attributes = {};
+        attributes.key = item.getElementsByTagName('key')[0].innerHTML;
+        attributes.title = item.getElementsByTagName('summary')[0].innerHTML;
+        attributes.description = item.getElementsByTagName('description')[0].innerHTML;
+        let timeestimate = item.getElementsByTagName('timeestimate')[0];
+        attributes.timeestimate = timeestimate ? timeestimate.getAttribute('seconds') : null;
 
-    return attributes;
+        /* Custom fields */
+        let customFields = Array.from(item.getElementsByTagName('customfields')[0].children);
+        customFields.forEach((customField) => {
+            if (customField.id === 'customfield_12310293') {
+                attributes.effort = parseInt(customField.getElementsByTagName('customfieldvalue')[0].innerHTML);
+            }
+            if (customField.id === 'customfield_12311120') {
+                attributes.epicLink = customField.getElementsByTagName('customfieldvalue')[0].innerHTML;
+            }
+        });
+        return attributes;
+    })
 }
 
 function onUpload (event) {
@@ -50,7 +52,7 @@ class JiraModel {
     }
 
     static isValid (attributes) {
-        return attributes.key && attributes.title;
+        return attributes && attributes.key && attributes.title;
     }
 }
 
@@ -93,7 +95,7 @@ class JiraCollection {
         this.element = document.getElementById('cards');
     }
 
-    add (attributes) {
+    _insertModel (attributes) {
         if (!JiraModel.isValid(attributes)) {
             return alert('XML invalide');
         }
@@ -106,6 +108,14 @@ class JiraCollection {
         this.models.set(attributes.key, model);
         this.views.set(attributes.key, view);
         this.displayChildView(view);
+    }
+
+    add (models) {
+        if (Array.isArray(models)) {
+            models.forEach(this._insertModel, this);
+        } else {
+            this._insertModel(models);
+        }
     }
 
     displayChildView (view) {
