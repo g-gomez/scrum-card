@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    <meta>
+    <head>
         <title>Jira Scrum Card Generator</title>
         <meta charset="UTF-8">
         <meta name="description" content="A generator of scrum card for physical board. Converts an XML JIRA into a printable card.">
@@ -8,18 +8,45 @@
         <meta name="author" content="Guillaume Gomez">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <link rel="stylesheet" type="text/css" href="assets/css/index.css">
-    </meta>
+    </head>
     <body>
+        <div id="settings-container">
+            <form class="form" id="settingsForm">
+                <div class="form-group">
+                    <label class="sr-only" for="jiraBaseUrl">JIRA REST API base URL</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">JIRA REST API base URL: </div>
+                        <input type="text" class="form-control" id="jiraBaseUrl" placeholder="http://jira.com/rest/api/latest">
+                    </div>
+                    <br/>
+                    <label class="sr-only" for="jiraStoryPoints">Story points field name</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">Story points field name: </div>
+                        <input type="text" class="form-control" id="jiraStoryPoints" placeholder="Level of effort">
+                    </div>
+                </div>
+                <br/>
+                <button type="submit" class="btn btn-primary btn-block">Save settings</button>
+            </form>
+        </div>
         <header>
             <h1>JIRA scrum card generator</h1>
-            <div>
-                <label class="file">
-                    <input type="file" id="file" accept="text/xml" multiple="multiple" />
-                    <span class="file-custom"></span>
-                </label>
-            </div>
+            <form class="form-inline" id="addJIRA">
+                <div class="form-group">
+                    <label class="sr-only" for="jiraKey">Add a JIRA</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">JIRA Key: </div>
+                        <input type="text" class="form-control" id="jiraKey" placeholder="MS-2000">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Add JIRA</button>
+            </form>
+            <img id="print" src="assets/img/icon-print.png"/>
+            <img id="settings" src="assets/img/icon-settings.png"/>
         </header>
         <section id="cards"></section>
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.13.0/lodash.min.js"></script>
         <script type="text/javascript" src="assets/js/app.js"></script>
     </body>
 </html>

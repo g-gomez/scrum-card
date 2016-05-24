@@ -6,122 +6,137 @@ h1 {
 
 header {
     text-align: center;
+    margin-bottom: 20px;
+    position: relative;
 }
 
-.file {
-    width: 500px;
-    margin: auto;
-    text-align: left;
+#print, #settings {
+    position: absolute;
+    top: 20px;
+    width: 50px;
+    cursor: pointer;
 }
 
-.file-custom:after {
-    content: 'Choisissez vos Jiras au format XML';
+#print {
+    right: 20px;
 }
 
-.file-custom:before {
-    content: 'Parcourir';
-}
-
-#cards {
-
+#settings {
+    left: 20px;
 }
 
 .card {
     width: 800px;
-	height: 340px;
-	border: solid 15px black;
-	margin: 25px auto;
-	position: relative;
-	page-break-inside: avoid;
-	background: white;
+    height: 340px;
+    border: solid 15px black;
+    margin: 0 auto 10px;
+    position: relative;
+    page-break-inside: avoid;
+    background: white;
     border-radius: 5px;
 }
 
 .card-key {
-	position: absolute;
-	top: 18px;
-	left: 20px;
-    color: orange;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    color: #97CDFC;
+    font-size: 170px;
+    text-align: center;
+    line-height: 310px;
+    font-weight: bold;
+    z-index: 1000;
+    opacity: 0.5;
+}
+
+.card-title, .card-description {
+    position: relative;
+    z-index: 2;
 }
 
 .card-title {
-	position: absolute;
-	height: 185px;
-	width: 400px;
-	top: 50px;
-	left: 20px;
-	text-align: left;
-	padding-top: 13px;
-	border-top: solid 2px black;
+    margin: 20px 80px 20px 20px;
 }
 
 .card-description {
-	position: absolute;
-	width: 300px;
-	height: 245px;
-	top: 19px;
-	right: 10px;
-	border-left: solid 1px grey;
-    padding-left: 10px;
-	text-align: left;
-	font-size: 13px;
-	line-height: 16px;
-	overflow: hidden;
+    margin: 20px;
+    font-size: 13px;
+    line-height: 16px;
+    max-height: 200px;
+    overflow: hidden;
 }
 
-.card-requirements {
+.card-links {
     position: absolute;
-    bottom: 10px;
-    left: 20px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 20px;
+    background-color: #fff;
+    font-weight: bold;
+    color: #DE1B35;
+    z-index: 3;
 }
 
-.requirement {
-    display: inline-block;
-    position: relative;
-    padding-left: 20px;
-    margin-right: 10px;
-    &:before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 4px;
-        height: 16px;
-        width: 16px;
-        border: 1px solid black;
-    }
+.card-complexity {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 75px;
+    width: 75px;
+    font-size: 30px;
+    line-height: 75px;
+    text-align: center;
+    border-radius: 0 5px;
+    border: solid 4px black;
+    border-top: none;
+    border-right: 0;
 }
 
-.classification {
-	position: absolute;
-	width: 170px;
-	height: 20px;
-	bottom: 15px;
-	left: 20px;
-	border: solid 4px black;
-	text-align: right;
-	font-size: 27px;
-	padding: 10px;
+.remove {
+    position: absolute;
+    right: -30px;
+    top: -30px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center, #cc0000 0%,#cc0000 100%);
+    width: 30px;
+    height: 30px;
+    line-height: 27px;
+    text-align: center;
+    color: #fff;
+    border: 2px solid #000;
+    box-shadow: 0px 0px 5px #fff;
+    cursor: pointer;
 }
 
-.complexite {
-	position: absolute;
-	width: 170px;
-	height: 20px;
-	bottom: 15px;
-	left: 240px;
-	border: solid 4px black;
-	text-align: right;
-	font-size: 27px;
-	padding: 10px;
+#settings-container {
+    display: none;
+    background: linear-gradient(to bottom, #dddddd 0%,#c9c9c9 100%);
+    padding: 50px;
+    box-shadow: 0 0 3px #000;
 }
 
+#settings-container.show {
+    display: block;
+}
+
+#settingsForm .input-group-addon {
+    min-width: 220px;
+}
 
 @media print {
-    header {
+    html, body, #cards {
+        margin: 0;
+        padding: 0;
+    }
+
+    header, #print, #settings, .remove, #settings-container {
         display: none;
     }
 
-    .card:first-child {
-        margin-top: 0;
+    .cards {
+        margin-bottom: 5px;
     }
 }
