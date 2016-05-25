@@ -1,7 +1,7 @@
 {
   "name": "jira-scrum-card-generator",
-  "version": "0.0.1",
-  "description": "A generator of scrum card for physical board. Converts an XML JIRA into a printable card.",
+  "version": "0.1.0",
+  "description": "A simple generator of scrum cards for physical board.",
   "keywords": [
     "scrum",
     "card",
